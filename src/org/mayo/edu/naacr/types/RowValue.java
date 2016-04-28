@@ -1,5 +1,7 @@
 package org.mayo.edu.naacr.types;
 
+import java.util.ArrayList;
+
 /**
  * The values for each column within a row. 
  */
@@ -16,7 +18,9 @@ public class RowValue {
     String ver_ret;
     String column;
     String description;
+    ArrayList<ValueSet> valueSets;
       
+
     public String getCode() {
         return code;
     }
@@ -50,7 +54,10 @@ public class RowValue {
     public String getDescription() {
         return description;
     }
-    
+    public ArrayList<ValueSet> getValueSets() {
+        return valueSets;
+    }
+
     public void setCode(String code) {
         this.code = code;
     }
@@ -84,7 +91,9 @@ public class RowValue {
     public void setDescription(String description) {
         this.description = description;
     }
-    
+    public void setValueSets(ArrayList<ValueSet> valueSets) {
+        this.valueSets = valueSets;
+    }
     
     public void println()  {
         System.out.print( "\t" +code );
@@ -97,6 +106,7 @@ public class RowValue {
         System.out.print( "\t" +year_ret );
         System.out.print( "\t" +ver_ret );
         System.out.print( "\t" +column );
+        System.out.print( "\t" +description );
         System.out.print( "\n" );
     }
     

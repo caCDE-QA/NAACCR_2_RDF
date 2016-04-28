@@ -15,6 +15,7 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.mayo.edu.naacr.helper.Constants;
 import org.mayo.edu.naacr.helper.SheetMethods;
 import org.mayo.edu.naacr.types.RowValue;
+import org.mayo.edu.naacr.types.ValueSet;
 
 /**
  * This program takes a spreadsheet containing NAACCR data elements 
@@ -47,6 +48,9 @@ public class NAACCR_2_RDF {
 		    
 		    Sheet descSheet = wb.getSheetAt(Constants.SHEET_DESC);
 		    getDescriptions(descSheet);
+		    
+	        Sheet valueSheet = wb.getSheetAt(Constants.SHEET_VS);
+	        getValueSets(valueSheet);
 
 		    rdfText = rdfText + composer.getRDF(dataElements);
 
@@ -112,12 +116,58 @@ public class NAACCR_2_RDF {
         for(Map.Entry<String, RowValue> entry : dataElements.entrySet())   {
             RowValue rowValue = entry.getValue();
             String code = rowValue.getCode();
-            int rowNum = findRow(elementSheet, code);
+            int rowNum = findCodeRow(elementSheet, code);
             
             row = elementSheet.getRow(rowNum);
             if(row != null) {
                 rowValue.setDescription(getCellValue(Constants.COL_DESC));
                 dataElements.put(code, rowValue);
+            }
+        }
+    }
+    
+    /**
+     * Reads the valueSets from the spreadsheet and puts them into the Objects
+     * @param elementSheet
+     * @return
+     */
+    private static void getValueSets(Sheet elementSheet)  {
+        
+        for(Map.Entry<String, RowValue> entry : dataElements.entrySet())   {
+            RowValue rowValue = entry.getValue();
+            String termName = rowValue.getName();  
+            
+            String code = rowValue.getCode();
+            int rowNum = findNameRow(elementSheet, termName);
+            
+            row = elementSheet.getRow(rowNum);
+            if(row != null) {
+                String name = null;
+                ArrayList<ValueSet> valueSets = new ArrayList<ValueSet>();
+                while( (name==null || name.equals("")) && row!=null)  {
+                    String cellValue = getCellValue(Constants.COL_SET_VALUE);
+                    if(cellValue!=null && !( cellValue.equals("") || cellValue.equals(" ")) )  {
+                        String vsCode = getCellValue(Constants.COL_SET_VALUE);
+                        if(!vsCode.equals("Custom codes for historic use only")  && !vsCode.equals("..."))  {
+                            ValueSet vs = new ValueSet(vsCode, getCellValue(Constants.COL_SET_DESC));
+                            valueSets.add(vs);
+                            rowValue.setValueSets(valueSets);
+                            dataElements.put(code, rowValue);
+                        }
+                        rowNum++;
+                        row = elementSheet.getRow(rowNum);
+                        if(row!=null)  {
+                            name = getCellValue(Constants.COL_SET_NAME);
+                        }
+                        else {
+                            name = null;
+                        }
+                    }
+                    else  {
+                        name = "no value sets";
+                        rowNum++;
+                    }
+                }
             }
         }
     }
@@ -139,6 +189,7 @@ public class NAACCR_2_RDF {
 	 */
 	private static String getCellValue(int colNum)  {
 	    String cellValue = "";
+	    
 	    Cell cell = row.getCell(colNum);
 	    
 	    if(cell == null)  {
@@ -160,10 +211,10 @@ public class NAACCR_2_RDF {
 	}
 	
 	
-	private static int findRow(Sheet sheet, String cellContent) {
+	private static int findCodeRow(Sheet sheet, String cellContent) {
 	    for (Row row : sheet) {
 	        for (Cell cell : row) {
-	            if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
+	            if (cell!=null && cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
 	                String cellValue = "" +cell.getNumericCellValue();
 	                cellValue = cellValue.replace(".0", "");
 	                if (cellValue.trim().equals(cellContent)) {
@@ -176,4 +227,18 @@ public class NAACCR_2_RDF {
 	}
 	
 	
+	   private static int findNameRow(Sheet sheet, String cellContent) {
+	        for (Row row : sheet) {
+	            for (Cell cell : row) {
+	                if (cell!=null && cell.getCellType() == Cell.CELL_TYPE_STRING) {
+	                    String cellValue = cell.getStringCellValue();
+	                    if (cellValue.trim().equals(cellContent)) {
+	                        return row.getRowNum();  
+	                    }
+	                }
+	            }
+	        }               
+	        return 0;
+	    }
+
 }

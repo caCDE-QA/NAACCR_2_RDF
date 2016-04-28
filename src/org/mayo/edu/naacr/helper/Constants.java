@@ -24,4 +24,8 @@ public class Constants {
 	
 	public static int COL_DESC = 2;
 	
+	public static int COL_SET_NAME = 0;
+	public static int COL_SET_VALUE = 1;
+	public static int COL_SET_DESC = 2;
+
 }

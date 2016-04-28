@@ -23,7 +23,9 @@ public class Text {
 
 	public static String URI_ELE = BASE +"#";
 	
-	public static String CON = "mms:context naaccr:DataDictionary ; \n";
+	public static String CON = "mms:context naaccr:";
+	
+	public static String IVD = "mms:inValueDomain naaccr:";
 	
 	public static String LABEL = "rdfs:label \"";
 	
@@ -39,13 +41,19 @@ public class Text {
 	
     public static String DEF = "skos:definition \"";
 	
+    public static String MEAN = "mms:meaningdescription \"";
+    
 	public static String STRING = "\"^^xsd:string ; \n";
 	
     public static String DEL = "mms:dataElementLabel \"";
 
 	public static String DED = "mms:dataElementDescription \"";
 	
-    public static String DE_NOTE = "skos:notation \"CDE_ID:";
+    public static String DE_CDE_NOTE = "skos:notation \"CDE_ID:";
+    
+    public static String DE_VD_NOTE = "skos:notation \"VD_ID:";
+    
+    public static String DE_VM_NOTE = "skos:notation \"VM_ID:";
 
     public static String YEAR = "naaccr:year \"";
 	
@@ -60,6 +68,12 @@ public class Text {
     public static String SOURCE = "naaccr:source \"";
     
     public static String COL_NUM = "naaccr:columnNum \"";
+    
+    public static String DD = "DataDictionary ; \n";
+    
+    public static String VD = "_vd";
+    
+    public static String VS = " Value Set";
     
 	public static String PER = ".";
 	
