@@ -1,5 +1,8 @@
 package org.mayo.edu.naacr.types;
 
+/**
+ * The value set code and value
+ */
 public class ValueSet {
 
     String value;

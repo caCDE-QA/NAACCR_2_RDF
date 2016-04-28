@@ -1,7 +1,7 @@
 package org.mayo.edu.naacr.helper;
 
 /**
- * The Strings used to create the RDF triples
+ * The Strings used to create the RDF triples   
  */
 public class Text {
 

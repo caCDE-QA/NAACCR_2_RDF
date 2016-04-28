@@ -14,7 +14,7 @@
 
 <http://www.naaccr.org/naaccr#1410> 
 mms:context naaccr:DataDictionary ; 
-rdf:type mms:DataElement ; 
+rdf:type mms:DataElement ;  
 rdfs:label "RX SUMM--BRM"^^xsd:string ; 
 skos:altLabel "Biological Response Modifiers (pre-96 SEER)Immunotherapy (SEER/CoC)"^^xsd:string ; 
 skos:definition "Records whether immunotherapeutic (biologic response modifiers) agents were administered as first-course treatment at all facilities or the reason they were not given. Immunotherapy consists of biological or chemical agents that alter the immune system or change the host’s response to tumor cells."^^xsd:string ; 

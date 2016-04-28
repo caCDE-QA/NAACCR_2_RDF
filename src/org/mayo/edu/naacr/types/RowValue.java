@@ -3,7 +3,7 @@ package org.mayo.edu.naacr.types;
 import java.util.ArrayList;
 
 /**
- * The values for each column within a row. 
+ * The values for each column within a row.    
  */
 public class RowValue {
 

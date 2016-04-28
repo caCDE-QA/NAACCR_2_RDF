@@ -1,7 +1,7 @@
 package org.mayo.edu.naacr.helper;
 
 /**
- * Define spreadsheet pages and columns
+ * Define spreadsheet pages and columns   
  */
 public class Constants {
     

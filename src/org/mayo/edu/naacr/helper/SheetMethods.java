@@ -4,7 +4,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
 /**
- * Makes sure the row is valid.
+ * Makes sure the row is valid.   
  */
 public class SheetMethods {
 

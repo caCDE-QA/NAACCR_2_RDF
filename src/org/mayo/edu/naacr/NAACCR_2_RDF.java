@@ -19,7 +19,7 @@ import org.mayo.edu.naacr.types.ValueSet;
 
 /**
  * This program takes a spreadsheet containing NAACCR data elements 
- * and converts them into RDF triples.
+ * and converts them into RDF triples.   
  * 
  * It hack of a program with no testing and should be treated as such.
  * 

@@ -9,7 +9,7 @@ import org.mayo.edu.naacr.types.RowValue;
 import org.mayo.edu.naacr.types.ValueSet;
 
 /**
- * The class constructs the RDF triples.
+ * The class constructs the RDF triples.   
  *
  */
 public class RDF_Composer {
